@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Search from "./Search";
 import Article from "../pages/Article";
+import Error from "../pages/Error";
 
 class Container extends React.Component {
   constructor(props) {
@@ -21,6 +22,9 @@ class Container extends React.Component {
         </Route>
         <Route path='/article/:slug'>
           <Article />
+        </Route>
+        <Route path="*">
+          <Error />
         </Route>
       </Switch>
     )
