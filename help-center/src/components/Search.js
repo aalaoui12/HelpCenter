@@ -4,7 +4,8 @@ import algoliasearch from 'algoliasearch/lite';
 import {
   InstantSearch,
   SearchBox,
-  Hits
+  Hits,
+  Highlight
 } from 'react-instantsearch-dom';
 
 const Search = () => {
@@ -13,14 +14,29 @@ const Search = () => {
     process.env.REACT_APP_SEARCH_API_KEY
   );
 
-  const Hit = ({ hit }) => <p>{hit.title}</p>;
+  function Hit(props) {
+  return (
+    <a href="https://www.google.com">
+      <article>
+        <h1>
+          <Highlight attribute="title" hit={props.hit} />
+        </h1>
+      </article>
+    </a>
+  );
+}
 
   return (
     <div className="ais-InstantSearch">
         <h1>React InstantSearch</h1>
         <InstantSearch indexName="dev_articles" searchClient={searchClient}>
           <div className="right-panel">
-            <SearchBox />
+            <SearchBox
+             className='searchbox'
+             onSubmit={event => {
+
+             }}
+            />
             <Hits hitComponent={Hit} />
           </div>
         </InstantSearch>
