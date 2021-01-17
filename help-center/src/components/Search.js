@@ -1,30 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import algoliasearch from 'algoliasearch/lite';
 import {
   InstantSearch,
   SearchBox,
+  Highlight,
   Hits,
-  Highlight
+  connectHits
 } from 'react-instantsearch-dom';
 
-const Search = () => {
-  const searchClient = algoliasearch(
-    'I2CQSI9ZP6',
-    process.env.REACT_APP_SEARCH_API_KEY
-  );
+const searchClient = algoliasearch(
+  'I2CQSI9ZP6',
+  process.env.REACT_APP_SEARCH_API_KEY
+);
 
-  function Hit(props) {
-  return (
-    <a href="https://www.google.com">
-      <article>
-        <h1>
-          <Highlight attribute="title" hit={props.hit} />
-        </h1>
-      </article>
-    </a>
-  );
-}
+const Search = (props) => {
+
+  function createURL(title) {
+
+  }
+
+  function Hits({ hits }) {
+    return (
+      <ul>
+        {hits.map(hit => (
+          <a key={hit.objectID} href={"/article/" + hit.slug}>
+            <li className="search_result">{hit.title}</li>
+          </a>
+        ))}
+      </ul>
+    );
+  }
+
+  const CustomHits = connectHits(Hits);
 
   return (
     <div className="ais-InstantSearch">
@@ -33,11 +41,9 @@ const Search = () => {
           <div className="right-panel">
             <SearchBox
              className='searchbox'
-             onSubmit={event => {
-
-             }}
+             onSubmit={event => {}}
             />
-            <Hits hitComponent={Hit} />
+            <CustomHits />
           </div>
         </InstantSearch>
       </div>
