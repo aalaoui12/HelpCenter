@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const element = <h1>Knowledge Base</h1>;
+import Container from './components/Container';
 
-ReactDOM.render(element, document.getElementById('root'));
+import './App.css';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Container />
+  </React.StrictMode>,
+  document.getElementById('root'));
