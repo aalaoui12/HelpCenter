@@ -24,3 +24,7 @@ yarn-error.log*
 
 # API Key
 .env
+
+#tailwind config
+craco.config.js
+tailwind.config.js

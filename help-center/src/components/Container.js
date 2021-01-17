@@ -14,10 +14,10 @@ class Container extends React.Component {
     return (
       <Switch>
         <Route exact path='/'>
-          <div>
-            <h1>Hello from Create React App</h1>
-            <p>Here should be a search component.</p>
-            <Search />
+          <div class="bg-blue-500 h-screen">
+            <div class="flex flex-wrap justify-center content-center h-screen">
+              <Search />
+            </div>
           </div>
         </Route>
         <Route path='/article/:slug'>

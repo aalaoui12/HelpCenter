@@ -53,10 +53,18 @@ const Article = (props) => {
   const { title, subtitle, content } = aboutContent;
 
   return (
-  <div>
-    <h1>{title}</h1>
-    <h2>{subtitle}</h2>
-    <p>{content}</p>
+  <div class="p-48 bg-blue-500 h-screen justify-center">
+    <div class="flex-wrap justify-self-stretch content-center">
+      <h1 class="text-7xl font-serif text-gray-200 py-3">{title}</h1>
+      <h2 class="text-3xl font-serif text-gray-200 py-3">{subtitle}</h2>
+      <p class="text-xl font-serif text-gray-200"><pre>&#9;</pre>{content}</p>
+    </div>
+    <div class="flex flex-wrap p-16 pl-80">
+      <a class="justify-center p-80 bg-white content-center shadow border-white border-2 rounded-full px-4 py-2 hover:bg-gray-200 text-blue-500"
+              href="/">
+        Back
+      </a>
+    </div>
   </div>
 )
 }

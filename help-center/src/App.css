@@ -1,2 +1,4 @@
-body { font-family: sans-serif; padding: 1em; }
-.searchbox { margin: 1em 0; }
+/* ./src/App.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
