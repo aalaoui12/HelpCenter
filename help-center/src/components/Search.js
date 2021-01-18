@@ -1,4 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
+
+import { NavLink } from "react-router-dom"
+
+import { updateHits } from '../redux/actions/actions';
+import { useDispatch } from 'react-redux';
 
 import algoliasearch from 'algoliasearch/lite';
 import {
@@ -20,18 +25,27 @@ const Search = (props) => {
   const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => (
     <form class="" noValidate action="" role="search">
       <div class="w-full py-10">
-        <input class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        <input class="w-8/12 border-2 border-gray-300 bg-white h-10 px-5 mr-4 rounded-lg text-sm focus:outline-none"
           type="search"
           value={currentRefinement}
           onChange={event => refine(event.currentTarget.value)}
         />
+        <button type="submit" class="justify-center p-80 bg-white content-center shadow border-white border-2 rounded-full px-4 py-2 hover:bg-gray-200 text-blue-500">
+          <NavLink to={"/results"}>
+            Search!
+          </NavLink>
+        </button>
       </div>
     </form>
   );
 
   const CustomSearchBox = connectSearchBox(SearchBox);
 
+  const dispatch = useDispatch();
+
   function Hits({ hits }) {
+    dispatch(updateHits(hits));
+
     return (
       <ul class="h-full">
         {hits.map(hit => (
@@ -50,14 +64,6 @@ const Search = (props) => {
 
   const CustomHits = connectHits(Hits);
 
-  const Results = connectStateResults(
-  ({ searchState }) =>
-    searchState && searchState.query ? (
-      <CustomHits />
-    ) : //<div>No query</div>
-    null
-);
-
   return (
     <div className="ais-InstantSearch">
         <h1 class="text-5xl font-serif text-gray-200">What would you like to know?</h1>
@@ -65,7 +71,7 @@ const Search = (props) => {
           <InstantSearch indexName="dev_articles" searchClient={searchClient}>
             <div class="w-full">
               <CustomSearchBox />
-              <Results />
+              <CustomHits />
             </div>
           </InstantSearch>
         </div>
